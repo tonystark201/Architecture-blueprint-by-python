@@ -72,3 +72,4 @@ __Note: Getting started drawing is very simple, the basic essentials are to draw
 + [How to install chocolatey in Windows](https://chocolatey.org/install)
 + [How to install graphviz in Windows](https://graphviz.org/download/)
 + [Python diagrams guide ](https://diagrams.mingrammer.com/docs/guides/diagram)
++ [Graphviz attributes](https://graphviz.gitlab.io/docs/attrs/compound/)
