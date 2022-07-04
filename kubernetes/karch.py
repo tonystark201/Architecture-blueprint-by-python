@@ -1,10 +1,7 @@
 from pathlib import Path
 
 from diagrams import Diagram, Cluster, Edge, Node
-from diagrams.aws.compute import Compute
-from diagrams.aws.iot import InternetOfThings
 from diagrams.digitalocean.storage import Volume
-from diagrams.generic.os import Android
 from diagrams.k8s.compute import Pod, Job, ReplicaSet, StatefulSet
 from diagrams.k8s.controlplane import ControllerManager, Scheduler, APIServer, Kubelet, KubeProxy
 from diagrams.k8s.infra import ETCD
@@ -17,7 +14,7 @@ class K8sExample:
     def __init__(self):
         self.graph_attr = {
             "layout": "neato",
-            "compound": "true", # make edge can link cluster border
+            "compound": "true",  # make edge can link cluster border
             "center": "true"
         }
         self.path = Path(__file__).parent.parent.joinpath("assets")
@@ -40,9 +37,9 @@ class K8sExample:
                 api_server = APIServer("APIServer")
 
             api_server >> etcd
-            api_server >>Edge(style="dashed")>> cm1
-            api_server >>Edge(reverse=True)>> scheduler
-            api_server >>Edge(reverse=True)>> cm2
+            api_server >> Edge(style="dashed") >> cm1
+            api_server >> Edge(reverse=True) >> scheduler
+            api_server >> Edge(reverse=True) >> cm2
 
             with Cluster('Data Plane'):
 
@@ -51,7 +48,7 @@ class K8sExample:
                     kubeproxy1 = KubeProxy("KubeProxy ")
 
                     with Cluster("Container Runtime",):
-                        pods1 = [Pod("pod"),Pod("pod"),Pod("pod")]
+                        pods1 = [Pod("pod"), Pod("pod"), Pod("pod")]
 
                     with Cluster("K8s Objects",):
                         objects1 = [
@@ -68,7 +65,7 @@ class K8sExample:
                     kubeproxy2 = KubeProxy("KubeProxy ")
 
                     with Cluster("Container Runtime",):
-                        pods2 = [Pod("pod"),Pod("pod"),Pod("pod")]
+                        pods2 = [Pod("pod"), Pod("pod"), Pod("pod")]
 
                     with Cluster("K8s Objects",):
                         objects2 = [
@@ -80,18 +77,18 @@ class K8sExample:
                             StorageClass("StorageClass ")
                         ]
 
-            api_server >> kubelet1 >> Edge(htail="cluster_Container Runtime") >> pods1[0]
+            api_server >> kubelet1 >> Edge(
+                htail="cluster_Container Runtime") >> pods1[0]
             api_server >> kubeproxy1
 
-            api_server >> kubelet2 >> Edge(htail="cluster_Container Runtime") >> pods2[0]
+            api_server >> kubelet2 >> Edge(
+                htail="cluster_Container Runtime") >> pods2[0]
             api_server >> kubeproxy2
 
-            kubeproxy1>>Edge(style="dashed",reverse=True)>>kubeproxy2
-            Node("User")>>api_server
+            kubeproxy1 >> Edge(style="dashed", reverse=True) >> kubeproxy2
+            Node("User") >> api_server
 
 
 if __name__ == '__main__':
     k8s = K8sExample()
     k8s.example1()
-
-

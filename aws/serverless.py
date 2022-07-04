@@ -9,7 +9,6 @@ from diagrams.aws.network import Route53
 
 class ALBExample:
 
-
     def __init__(self):
         self.graph_attr = {
             "fontcolor": "black",
@@ -32,7 +31,7 @@ class ALBExample:
             api = APIGateway("api")
             with Cluster("Product Service"):
                 lambda1 = Lambda("Lambda")
-                lambda1>>Dynamodb("Product DB")
+                lambda1 >> Dynamodb("Product DB")
 
             with Cluster("Order Service"):
                 lambda2 = Lambda("Lambda")
@@ -42,9 +41,8 @@ class ALBExample:
                 lambda3 = Lambda("Lambda")
                 lambda3 >> RDS("Invoice DB")
 
-
             with Cluster("Analysis Service"):
-                lambda4= Lambda("Lambda")
+                lambda4 = Lambda("Lambda")
                 lambda4 >> Redshift("Analysis")
 
             sqs = SQS('message queue')
@@ -58,6 +56,7 @@ class ALBExample:
             sqs >> Edge(color="darkgreen") >> lambda2
             sqs >> Edge(color="darkgreen") >> lambda3
             sqs >> Edge(color="darkgreen") >> lambda4
+
 
 if __name__ == '__main__':
     demo = ALBExample()

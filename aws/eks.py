@@ -34,47 +34,37 @@ class EKSExample:
             node1 = Node("Data Resource")
             node2 = Node("Use Case")
 
-            with Cluster('Security',  direction="TB"):
+            with Cluster('Security', direction="TB"):
                 ss = [
                     ECR("ECR"), IAM("IAM"),
                     SecretsManager("Secrets Manager"),
                     Cloudwatch("Cloudwatch")
                 ]
 
+            with Cluster('Workload on EKS', direction="TB"):
+                eks = [EKS("EKS Jupyter notebook"), EKS("EKS job")]
 
-            with Cluster('Workload on EKS',  direction="TB"):
-                eks = [EKS("EKS Jupyter notebook"),EKS("EKS job")]
-
-            github=Github("Git Script")
+            github = Github("Git Script")
             s3 = S3("AWS S3")
 
             with Cluster('Orchestration on EKS', direction="TB"):
                 argo = Argocd("argo")
                 argo >> Node("ThirdParty Plugin")
 
-            with Cluster('Data Lake',  direction="TB"):
+            with Cluster('Data Lake', direction="TB"):
                 s3_in = S3("AWS S3")
                 glue = Glue("AWS Glue")
                 athena = Athena("AWS Athena")
-                athena>>s3_in
-                athena >> Edge(label="create") >> glue>>node2
+                athena >> s3_in
+                athena >> Edge(label="create") >> glue >> node2
 
             for s in ss:
                 for e in eks:
-                    s>>e
+                    s >> e
 
-            node1>>eks[0]>>github>>s3>>argo>>eks[1]>>s3_in
+            node1 >> eks[0] >> github >> s3 >> argo >> eks[1] >> s3_in
 
 
 if __name__ == '__main__':
     eks = EKSExample()
     eks.example1()
-
-
-
-
-
-
-
-
-

@@ -20,7 +20,6 @@ class MLExample:
         }
         self.path = Path(__file__).parent.parent.joinpath("assets")
 
-
     def example1(self):
         with Diagram(
             name="ML Example",
@@ -29,7 +28,7 @@ class MLExample:
             graph_attr=self.graph_attr
         ):
 
-            with Cluster('Society Media',direction="TB"):
+            with Cluster('Society Media', direction="TB"):
                 lambda1 = Lambda(
                     "Identity data to be processed"
                 )
@@ -38,21 +37,21 @@ class MLExample:
                 )
                 cw = CloudwatchEventEventBased("Schedule data pull")
                 eb = Eventbridge("AWS EventBridge")
-                s3=S3("Bucket(Ingestion for JSON files)")
+                s3 = S3("Bucket(Ingestion for JSON files)")
                 dynamo = Dynamodb("DynamoDB")
 
             ks = KinesisDataStreams("Kinesis Data Stream")
             lambda01 = Lambda("Ingestion consumer")
 
-            with Cluster('Step Function workflow',direction="TB"):
-               sf1 = SF("Topic modeling")
-               sf2 = SF("Text interface")
+            with Cluster('Step Function workflow', direction="TB"):
+                sf1 = SF("Topic modeling")
+                sf2 = SF("Text interface")
 
             s3_outer1 = S3("Bucket(Raw text for topic modeling)")
             cw_outer = CloudwatchEventEventBased("Event Scheduler")
 
-            reko=Rekognition("Rekognition")
-            comp1 =Comprehend("Comprehend")
+            reko = Rekognition("Rekognition")
+            comp1 = Comprehend("Comprehend")
             trans = Translate("Translate")
             comp2 = Comprehend("Comprehend")
             eb_outer = Eventbridge("EventBridge(publish interface events)")
@@ -76,7 +75,8 @@ class MLExample:
             sf2 >> Edge(lhead="cluster_Step Function workflow") >> trans
             sf2 >> Edge(lhead="cluster_Step Function workflow") >> comp2
             sf2 >> Edge(lhead="cluster_Step Function workflow") >> eb_outer
-            eb_outer>>lambda02>>kdf>>s3_outer2<<glue<<a<<q<<User("User")
+            eb_outer >> lambda02 >> kdf >> s3_outer2 << glue << a << q << User(
+                "User")
 
 
 if __name__ == '__main__':

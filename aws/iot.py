@@ -14,7 +14,6 @@ class IOTExample:
     example1: Smart Metering for Water Utilities
     """
 
-
     def __init__(self):
         self.path = Path(__file__).parent.parent.joinpath("assets")
 
@@ -25,18 +24,18 @@ class IOTExample:
             show=False,
             direction="LR"
         ):
-            with Cluster('Devices',direction="LR"):
+            with Cluster('Devices', direction="LR"):
                 c1 = Client("BLE")
                 c2 = Client("BLE")
 
-                with Cluster('Meter Box1',direction="LR"):
-                    f1=FreeRTOS("FreeRTOS")
+                with Cluster('Meter Box1', direction="LR"):
+                    f1 = FreeRTOS("FreeRTOS")
 
-                with Cluster('Meter Box2',direction="LR"):
-                    f2=FreeRTOS("FreeRTOS")
+                with Cluster('Meter Box2', direction="LR"):
+                    f2 = FreeRTOS("FreeRTOS")
 
             gateway = IotDeviceGateway("IotDeviceGateway")
-            with Cluster('AWS CLoud',direction="LR"):
+            with Cluster('AWS CLoud', direction="LR"):
                 iot_core = IotCore("IotCore")
                 iot_rule = IotRule("IotRule")
 
@@ -61,18 +60,16 @@ class IOTExample:
                     api_gateway = APIGateway("APIGateway")
                     amplify = Amplify("Amplify")
 
-            c1>>f1>>gateway
-            c2>>f2>>gateway
-            gateway>>iot_core
-            l1>>iot_core
-            iot_core>>iot_rule
+            c1 >> f1 >> gateway
+            c2 >> f2 >> gateway
+            gateway >> iot_core
+            l1 >> iot_core
+            iot_core >> iot_rule
             iot_rule >> time_stream
-            iot_rule >> s3<< ec2_2<<l2<<api_gateway
-            iot_core>>iot_event>>ec2_1
+            iot_rule >> s3 << ec2_2 << l2 << api_gateway
+            iot_core >> iot_event >> ec2_1
+
 
 if __name__ == '__main__':
     iot = IOTExample()
     iot.example1()
-
-
-
