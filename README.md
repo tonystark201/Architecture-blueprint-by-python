@@ -66,7 +66,16 @@ The Diagrams library has four main components, namely diagrams, nodes, clusters,
    The Edge object contains three properties: label, color, and style
 
 __Note: Getting started drawing is very simple, the basic essentials are to draw with the sample code as a reference. You can check and view the code in this Repo and start your drawing.__
+## Example Show
 
++ The serverless arch by using Lambda,ApiGateway,DynamoDB,etc
+[Serverless](https://github.com/tonystark201/Architecture-blueprint-by-python/blob/main/assets/serverless1.png)
++ The ECS deployment
+[ECS deployment](https://github.com/tonystark201/Architecture-blueprint-by-python/blob/main/assets/ecs1.png)
++ The ELKB stack
+[ELKB](https://github.com/tonystark201/Architecture-blueprint-by-python/blob/main/assets/elkb1.png)
++ The ML example by using eventbridge,rekogniton,translate,etc.
+[ML](https://github.com/tonystark201/Architecture-blueprint-by-python/blob/main/assets/ml1.png)
 ## Summary
 
 The Python drawing library is more practical, but if you are not familiar with `graphviz`, there will be some unsightly situations in the layout of the architecture diagram. The purpose of this library is to make drawing architecture images the same as writing code, but from the actual effect, for some simple architecture diagrams, it is more convenient to use, but for some complex architectures, the layout of the images is ugly. Therefore, this library has a long way to go if it wants to make a difference.
