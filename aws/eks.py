@@ -1,5 +1,4 @@
 from pathlib import Path
-
 from diagrams import Diagram, Cluster, Node, Edge
 from diagrams.aws.analytics import Glue, Athena
 from diagrams.aws.compute import ECR, EKS

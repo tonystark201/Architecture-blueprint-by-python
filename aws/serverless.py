@@ -1,5 +1,4 @@
 from pathlib import Path
-
 from diagrams import Diagram, Cluster, Edge
 from diagrams.aws.compute import Lambda
 from diagrams.aws.database import Dynamodb, RDS, Redshift

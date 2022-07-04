@@ -1,5 +1,4 @@
 from pathlib import Path
-
 from diagrams import Diagram, Cluster, Edge
 from diagrams.aws.analytics import KinesisDataStreams, KinesisDataFirehose, Glue, Athena, Quicksight
 from diagrams.aws.compute import Lambda

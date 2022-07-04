@@ -1,15 +1,11 @@
 from pathlib import Path
-
-from diagrams import Diagram, Cluster, Edge, Node
-from diagrams.aws.compute import Lambda, ECS
-from diagrams.aws.database import Dynamodb, RDS, Redshift
-from diagrams.aws.integration import SQS
-from diagrams.aws.mobile import APIGateway
+from diagrams import Diagram, Cluster, Edge
+from diagrams.aws.compute import ECS
+from diagrams.aws.database import Dynamodb
 from diagrams.aws.network import Route53, ALB
 
 
 class ALBExample:
-
 
     def __init__(self):
         self.graph_attr = {
@@ -20,10 +16,6 @@ class ALBExample:
         self.path = Path(__file__).parent.parent.joinpath("assets")
 
     def example1(self):
-        """
-        Serverless with ApiGateway,SQS,Lambda function
-        :return:
-        """
         with Diagram(
             name="ECS",
             filename=self.path.joinpath('ecs1').as_posix(),

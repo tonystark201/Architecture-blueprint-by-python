@@ -1,5 +1,4 @@
 from pathlib import Path
-
 from diagrams import Diagram, Cluster
 from diagrams.aws.compute import Lambda, EC2
 from diagrams.aws.database import Timestream
