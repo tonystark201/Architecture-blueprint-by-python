@@ -24,7 +24,9 @@ class OnPremiseExample:
         ):
             ingress = Nginx("ingress")
             metrics = Prometheus("metric")
-            metrics << Edge(color="firebrick", style="dashed") << Grafana("monitoring")
+            metrics << Edge(
+                color="firebrick",
+                style="dashed") << Grafana("monitoring")
 
             with Cluster("Service Cluster"):
                 grpcsvc = [
@@ -34,7 +36,8 @@ class OnPremiseExample:
 
             with Cluster("Sessions HA"):
                 primary = Redis("session")
-                primary - Edge(color="brown", style="dashed") - Redis("replica") << Edge(label="collect") << metrics
+                primary - Edge(color="brown", style="dashed") - \
+                    Redis("replica") << Edge(label="collect") << metrics
                 grpcsvc >> Edge(color="brown") >> primary
 
             with Cluster("Database HA"):
@@ -47,7 +50,10 @@ class OnPremiseExample:
             aggregator >> Edge(label="parse") >> Kafka("stream") >> Edge(color="black", style="bold") >> Spark(
                 "analytics")
 
-            ingress >> Edge(color="darkgreen") << grpcsvc >> Edge(color="darkorange") >> aggregator
+            ingress >> Edge(
+                color="darkgreen") << grpcsvc >> Edge(
+                color="darkorange") >> aggregator
+
 
 if __name__ == '__main__':
     OnPremiseExample().example1()

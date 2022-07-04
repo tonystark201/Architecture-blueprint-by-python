@@ -30,14 +30,18 @@ class ELKBExample:
 
             kibana = Kibana("Kibana")
 
-            Apache("Apache")>>Beats("Beats")>>Edge(color="darkblue",label="Logs")>>logstash
-            Nginx("Nginx")>>Beats("Beats")>>Edge(color="darkblue",label="Logs")>>logstash
-            Python("Python")>>Beats("Beats")>>Edge(color="darkblue",label="Logs")>>logstash
-            Go("Go")>>Beats("Beats")>>Edge(color="darkblue",label="Logs")>>logstash
-            logstash>>Edge(color="darkblue",label="Ingested Logs")>>e1
-            e1<<Edge(color="darkblue",label="Search")<<kibana
+            Apache("Apache") >> Beats("Beats") >> Edge(
+                color="darkblue", label="Logs") >> logstash
+            Nginx("Nginx") >> Beats("Beats") >> Edge(
+                color="darkblue", label="Logs") >> logstash
+            Python("Python") >> Beats("Beats") >> Edge(
+                color="darkblue", label="Logs") >> logstash
+            Go("Go") >> Beats("Beats") >> Edge(
+                color="darkblue", label="Logs") >> logstash
+            logstash >> Edge(color="darkblue", label="Ingested Logs") >> e1
+            e1 << Edge(color="darkblue", label="Search") << kibana
+
 
 if __name__ == '__main__':
     elkb = ELKBExample()
     elkb.example1()
-

@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 diagrams = "*"
+autopep8 = "*"
+flake8 = "*"
 
 [dev-packages]
 
